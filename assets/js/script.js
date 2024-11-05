@@ -1,90 +1,67 @@
-// Funzione per creare elementi HTML
-function creaElemento(tag, attributi = {}, contenuto = '') {
-    const elemento = document.createElement(tag);
+// Function to create HTML elements
+function createElement(tag, attributes = {}, content = '') {
+    const element = document.createElement(tag);
 
-    for (const chiave in attributi) {
-        elemento.setAttribute(chiave, attributi[chiave]);
+    for (const key in attributes) {
+        element.setAttribute(key, attributes[key]);
     }
 
-    elemento.innerHTML = contenuto;
-    return elemento;
+    element.innerHTML = content;
+    return element;
 }
 
-// Creazione degli elementi HTML
-const divContainer = creaElemento('div', { id: 'container' });
+// Creation of HTML elements in the DOM
+const divContainer = createElement('div', { id: 'container' });
 document.body.appendChild(divContainer);
 
-const h1Title = creaElemento('h1', { class: 'title' }, 'How many pixels can you count?');
+const h1Title = createElement('h1', { class: 'title' }, 'How many pixels can you count?');
 divContainer.appendChild(h1Title);
 
-const divNumber = creaElemento('div', { id: 'number' }, 0);
+const divNumber = createElement('div', { id: 'number' }, 0);
 divContainer.appendChild(divNumber);
 
-const divPulsanti = creaElemento('div', { class: 'pulsanti' });
-divContainer.appendChild(divPulsanti);
+const divButtons = createElement('div', { class: 'buttons' });
+divContainer.appendChild(divButtons);
 
-const pulSubtract = creaElemento('button', { id: 'subtract' }, '-');
-const pulReset = creaElemento('button', { id: 'reset' }, 'Reset');
-const pulAdd = creaElemento('button', { id: 'add' }, '+');
+const pulSubtract = createElement('button', { id: 'subtract' }, '-');
+const pulReset = createElement('button', { id: 'reset' }, 'Reset');
+const pulAdd = createElement('button', { id: 'add' }, '+');
 
-// Aggiunta icona a Reset button
-const icona = creaElemento('i', {class: 'fa-solid fa-xmark'});
-pulReset.appendChild(icona);
+const icon = createElement('i', {class: 'fa-solid fa-xmark'});
+pulReset.appendChild(icon
 
-// Aggiunta dei pulsanti al div "pulsanti"
-divPulsanti.appendChild(pulSubtract);
-divPulsanti.appendChild(pulReset);
-divPulsanti.appendChild(pulAdd);
+);
 
-
-let contatore = 0;
-
-function aggiungi() {
-    contatore++;
-    document.getElementById("number").innerHTML = contatore;
-}
-
-function sottrai() {
-    if(contatore > 0) {
-        contatore--;
-    }
-    document.getElementById("number").innerHTML = contatore;
-}
-
-function reset() {
-    contatore = 0;
-    document.getElementById("number").innerHTML = contatore;
-}
+// Adding buttons to divButtons"
+divButtons.appendChild(pulSubtract);
+divButtons.appendChild(pulReset);
+divButtons.appendChild(pulAdd);
 
 
-pulSubtract.addEventListener('click', function() {
-    if (contatore <= 0) {
-        if (!document.querySelector('.alert')) {
-            const alert = document.createElement('p');
-            alert.className = 'alert';
-            alert.textContent = "Sorry. You can't count a negative number of pixels!";
-            divContainer.appendChild(alert);
-        }
+let counter = 0;
+
+// Functions to handle clicks on buttons and updating the counter
+document.getElementById('subtract').onclick = function(){
+    if(counter > 0) {
+        counter--;
+        document.getElementById('number').innerHTML = counter;
     } else {
-        const existingAlert = document.querySelector('.alert');
-        if (existingAlert) {
-            existingAlert.remove();
-        }
-        
-        sottrai();
+        const alert = createElement('p', {id: 'alert'}, 'Sorry. You can\'t count a negative number of pixels!');
+        divContainer.appendChild(alert);
     }
-});
+}
 
-function aggiungi() {
-    contatore++;
-    document.getElementById("number").innerHTML = contatore;
+document.getElementById('reset').onclick = function(){
+    counter = 0;
+    document.getElementById("number").innerHTML = counter;
+}
 
-    const existingAlert = document.querySelector('.alert');
+document.getElementById('add').onclick = function(){
+    counter++;
+    document.getElementById('number').innerHTML = counter;
+
+    const existingAlert = document.querySelector('#alert');
     if (existingAlert) {
         existingAlert.remove();
     }
 }
-
-pulSubtract.addEventListener('click', sottrai);
-pulReset.addEventListener('click', reset);
-pulAdd.addEventListener('click', aggiungi);
