@@ -28,9 +28,7 @@ const pulReset = createElement('button', { id: 'reset' }, 'Reset');
 const pulAdd = createElement('button', { id: 'add' }, '+');
 
 const icon = createElement('i', {class: 'fa-solid fa-xmark'});
-pulReset.appendChild(icon
-
-);
+pulReset.appendChild(icon);
 
 // Adding buttons to divButtons"
 divButtons.appendChild(pulSubtract);
