@@ -14,3 +14,4 @@ The elements have been created by manipulating the DOM in JS.
 - JavaScript
 
 ## 🔗 Link to the website
+https://basic-js-counter-lisab.netlify.app/
