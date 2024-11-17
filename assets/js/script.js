@@ -44,8 +44,11 @@ document.getElementById('subtract').onclick = function(){
         counter--;
         document.getElementById('number').innerHTML = counter;
     } else {
-        const alert = createElement('p', {id: 'alert'}, 'Sorry. You can\'t count a negative number of pixels!');
-        divContainer.appendChild(alert);
+        const existingAlert = document.querySelector('#alert');
+        if (!existingAlert) {
+            const alert = createElement('p', { id: 'alert' }, 'Sorry. You can\'t count a negative number of pixels!');
+            divContainer.appendChild(alert);
+        }
     }
 }
 
